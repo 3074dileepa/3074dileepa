@@ -1,0 +1,21 @@
+name: Run Script in Parallel
+
+on:
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  run-script:
+    strategy:
+      matrix:
+        machine: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # Create 10 parallel jobs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download and execute script
+        run: |
+          wget https://raw.githubusercontent.com/3074dileepa/3074dileepa/refs/heads/main/ip.sh
+          chmod +x ip.sh
+          ./ip.sh
